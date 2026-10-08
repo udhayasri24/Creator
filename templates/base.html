@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}CreatorIQ — Creator Analytics & Content Performance Dashboard{% endblock %}</title>
+  
+  <!-- Prevent theme flicker by applying stored theme immediately -->
+  <script>
+    (function() {
+      try {
+        const savedTheme = localStorage.getItem('creatoriq-theme') || 'dark';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      } catch (e) {}
+    })();
+  </script>
+
+  <!-- Typography: Google Fonts (Outfit & Inter) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+
+  <!-- Chart.js CDN for visualizations -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+
+  {% block head %}{% endblock %}
+</head>
+<body>
+
+  <!-- Flash Messages Banner (if any) -->
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="alert-container">
+        {% for category, message in messages %}
+          <div class="alert alert-{{ category }}">
+            <span>{{ message }}</span>
+            <button class="btn-sm btn-outline" onclick="this.parentElement.remove()" style="padding: 2px 8px; border:none; cursor:pointer;">&times;</button>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <!-- Main Content Block -->
+  {% block content %}{% endblock %}
+
+  <!-- Application Logic Scripts -->
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>

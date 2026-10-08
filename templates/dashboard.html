@@ -1,0 +1,511 @@
+{% extends "base.html" %}
+
+{% block title %}Analytics Command Center — CreatorIQ Dashboard{% endblock %}
+
+{% block content %}
+<div class="dashboard-layout">
+  <!-- Mobile Sidebar Backdrop Overlay -->
+  <div id="sidebarBackdrop" class="sidebar-backdrop"></div>
+
+  <!-- 1. Left Sidebar Navigation -->
+  <aside id="dashboardSidebar" class="dashboard-sidebar">
+    <div class="sidebar-brand">
+      <a href="{{ url_for('main.index') }}" class="brand-logo">
+        <div class="brand-icon-box">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 3v18h18"></path>
+            <path d="m19 9-5 5-4-4-3 3"></path>
+          </svg>
+        </div>
+        <span>Creator<span class="gradient-text">IQ</span></span>
+      </a>
+    </div>
+
+    <nav class="sidebar-nav">
+      <div class="sidebar-category-title">Main Menu</div>
+
+      <a href="{{ url_for('dashboard.dashboard_view') }}" class="nav-item active">
+        <div class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="7" height="7"></rect>
+            <rect x="14" y="3" width="7" height="7"></rect>
+            <rect x="14" y="14" width="7" height="7"></rect>
+            <rect x="3" y="14" width="7" height="7"></rect>
+          </svg>
+        </div>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="#content-analytics" class="nav-item" onclick="alert('Content Analytics module scheduled for Milestone 2'); return false;">
+        <div class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+            <polyline points="14 2 14 8 20 8"></polyline>
+          </svg>
+        </div>
+        <span>Content Analytics</span>
+      </a>
+
+      <a href="#audience-analytics" class="nav-item" onclick="alert('Audience Analytics module scheduled for Milestone 2'); return false;">
+        <div class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+            <circle cx="9" cy="7" r="4"></circle>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+          </svg>
+        </div>
+        <span>Audience Analytics</span>
+      </a>
+
+      <a href="#growth-trends" class="nav-item" onclick="alert('Growth & Trends module scheduled for Milestone 2'); return false;">
+        <div class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+            <polyline points="17 6 23 6 23 12"></polyline>
+          </svg>
+        </div>
+        <span>Growth & Trends</span>
+      </a>
+
+      <a href="#revenue" class="nav-item" onclick="alert('Revenue Analytics module scheduled for Milestone 2'); return false;">
+        <div class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="1" x2="12" y2="23"></line>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+        </div>
+        <span>Revenue</span>
+      </a>
+
+      <a href="#platforms" class="nav-item" onclick="document.getElementById('platforms-section').scrollIntoView({behavior:'smooth'}); return false;">
+        <div class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+            <line x1="8" y1="21" x2="16" y2="21"></line>
+            <line x1="12" y1="17" x2="12" y2="21"></line>
+          </svg>
+        </div>
+        <span>Platforms</span>
+      </a>
+
+      <div class="sidebar-category-title" style="margin-top: 0.75rem;">Workspace</div>
+
+      <a href="#reports" class="nav-item" onclick="alert('Reports export scheduled for Milestone 4'); return false;">
+        <div class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+            <polyline points="7 10 12 15 17 10"></polyline>
+            <line x1="12" y1="15" x2="12" y2="3"></line>
+          </svg>
+        </div>
+        <span>Reports</span>
+      </a>
+
+      <a href="#notifications" class="nav-item" onclick="alert('Notification feed scheduled for Milestone 4'); return false;">
+        <div class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+        </div>
+        <span>Notifications</span>
+      </a>
+
+      <a href="#settings" class="nav-item" onclick="alert('Settings panel scheduled for Milestone 2'); return false;">
+        <div class="nav-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="3"></circle>
+            <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+          </svg>
+        </div>
+        <span>Settings</span>
+      </a>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="user-snippet">
+        <div class="avatar">AR</div>
+        <div class="user-meta">
+          <div class="user-name">{{ user_name }}</div>
+          <div class="user-role">{{ user_role }}</div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- 2. Dashboard Main Content Area -->
+  <main class="dashboard-main">
+    <!-- Top Navigation Header -->
+    <header class="dashboard-topbar">
+      <div class="topbar-left">
+        <!-- Mobile Sidebar Toggle -->
+        <button id="mobileMenuToggle" class="btn-icon mobile-menu-toggle" aria-label="Open Sidebar Menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+
+        <!-- Search Field -->
+        <div class="search-box">
+          <span class="search-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+          </span>
+          <input type="text" class="search-input" placeholder="Search analytics, videos, posts..." aria-label="Search">
+        </div>
+      </div>
+
+      <div class="topbar-right">
+        <!-- Notification Icon -->
+        <button class="btn-icon notification-btn" title="Notifications" onclick="alert('Notification center will be connected in Milestone 4.');">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+          </svg>
+          <span class="notification-badge"></span>
+        </button>
+
+        <!-- Dark / Light Mode Toggle Button -->
+        <button class="btn-icon theme-toggle-btn" aria-label="Toggle Theme">
+          <span class="theme-toggle-icon"></span>
+        </button>
+
+        <!-- User Profile Area -->
+        <div style="display: flex; align-items: center; gap: 0.65rem; padding-left: 0.5rem;">
+          <a href="{{ url_for('auth.logout') }}" class="btn btn-outline btn-sm" title="Sign out of demo session">
+            <span>Sign Out</span>
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <!-- Dashboard Content Body -->
+    <div class="dashboard-content">
+      <!-- Page Title & Milestone Status -->
+      <div class="dashboard-page-header">
+        <div>
+          <h1>Creator Analytics Command Center</h1>
+          <p>Real-time cross-platform content metrics, audience analytics & revenue trends.</p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 0.75rem;">
+          <span class="badge badge-primary">Milestone 1 UI Shell</span>
+          <span class="badge badge-success">● Live Preview Active</span>
+        </div>
+      </div>
+
+      <!-- 3. Dashboard KPI Cards -->
+      <div class="kpi-grid">
+        <!-- KPI 1: Views -->
+        <div class="kpi-card">
+          <div class="kpi-card-header">
+            <span class="kpi-title">Total Views</span>
+            <div class="kpi-icon-pill">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-value">{{ kpis.views.value }}</div>
+          <div class="kpi-footer">
+            <span class="kpi-trend" style="color: var(--accent-emerald);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              {{ kpis.views.growth }}
+            </span>
+            <span class="kpi-period">{{ kpis.views.period }}</span>
+          </div>
+        </div>
+
+        <!-- KPI 2: Likes -->
+        <div class="kpi-card">
+          <div class="kpi-card-header">
+            <span class="kpi-title">Total Likes</span>
+            <div class="kpi-icon-pill" style="color: var(--accent-pink);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-value">{{ kpis.likes.value }}</div>
+          <div class="kpi-footer">
+            <span class="kpi-trend" style="color: var(--accent-emerald);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              {{ kpis.likes.growth }}
+            </span>
+            <span class="kpi-period">{{ kpis.likes.period }}</span>
+          </div>
+        </div>
+
+        <!-- KPI 3: Followers -->
+        <div class="kpi-card">
+          <div class="kpi-card-header">
+            <span class="kpi-title">Followers</span>
+            <div class="kpi-icon-pill" style="color: var(--accent-cyan);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-value">{{ kpis.followers.value }}</div>
+          <div class="kpi-footer">
+            <span class="kpi-trend" style="color: var(--accent-emerald);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              {{ kpis.followers.growth }}
+            </span>
+            <span class="kpi-period">{{ kpis.followers.period }}</span>
+          </div>
+        </div>
+
+        <!-- KPI 4: Engagement Rate -->
+        <div class="kpi-card">
+          <div class="kpi-card-header">
+            <span class="kpi-title">Engagement</span>
+            <div class="kpi-icon-pill" style="color: var(--accent-amber);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+                <polyline points="17 6 23 6 23 12"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-value">{{ kpis.engagement.value }}</div>
+          <div class="kpi-footer">
+            <span class="kpi-trend" style="color: var(--accent-emerald);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              {{ kpis.engagement.growth }}
+            </span>
+            <span class="kpi-period">{{ kpis.engagement.period }}</span>
+          </div>
+        </div>
+
+        <!-- KPI 5: Revenue -->
+        <div class="kpi-card">
+          <div class="kpi-card-header">
+            <span class="kpi-title">Total Revenue</span>
+            <div class="kpi-icon-pill" style="color: var(--accent-emerald);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="kpi-value" style="color: var(--accent-emerald);">{{ kpis.revenue.value }}</div>
+          <div class="kpi-footer">
+            <span class="kpi-trend" style="color: var(--accent-emerald);">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="18 15 12 9 6 15"></polyline></svg>
+              {{ kpis.revenue.growth }}
+            </span>
+            <span class="kpi-period">{{ kpis.revenue.period }}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. Platforms Section -->
+      <section class="dashboard-section" id="platforms-section">
+        <div class="dashboard-section-header">
+          <div>
+            <h2>Connected Platform Accounts</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Real-time OAuth integration links (Scheduled for Milestone 3)</p>
+          </div>
+          <span class="badge badge-warning">Integrations Inactive (Milestone 1 Demo)</span>
+        </div>
+
+        <div class="platform-cards-row">
+          {% for platform in platforms %}
+            <div class="platform-status-card {{ platform.id }}">
+              <div class="platform-status-header">
+                <div class="platform-brand-info">
+                  <div class="platform-icon-circle" style="background-color: {{ platform.accent }};">
+                    {% if platform.id == 'youtube' %}
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                      </svg>
+                    {% elif platform.id == 'instagram' %}
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+                      </svg>
+                    {% elif platform.id == 'linkedin' %}
+                      <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+                      </svg>
+                    {% endif %}
+                  </div>
+                  <div>
+                    <h3>{{ platform.name }}</h3>
+                    <p>{{ platform.handle }}</p>
+                  </div>
+                </div>
+                <span class="badge badge-warning">{{ platform.status }}</span>
+              </div>
+
+              <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">{{ platform.desc }}</p>
+
+              <div class="platform-status-footer">
+                <span style="font-size: 0.775rem; color: var(--text-muted);">OAuth API v3</span>
+                <button class="btn btn-outline btn-sm" onclick="alert('Platform OAuth connection is planned for Milestone 3.');">
+                  Connect {{ platform.name }}
+                </button>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </section>
+
+      <!-- 5. Dashboard Charts Grid (5 Rendered Visualizations) -->
+      <section class="dashboard-section">
+        <div class="dashboard-section-header">
+          <div>
+            <h2>Cross-Platform Performance Visualizations</h2>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Dynamic charts powered by Chart.js (Interactive demo data)</p>
+          </div>
+          <span class="badge badge-primary">Chart.js 4.4 Engine Active</span>
+        </div>
+
+        <div class="charts-grid">
+          <!-- Chart 1: Follower Growth (Line Chart) -->
+          <div class="chart-card chart-card-lg">
+            <div class="chart-header">
+              <div class="chart-title-area">
+                <h3>Follower Growth</h3>
+                <p>Monthly audience progression across platforms</p>
+              </div>
+              <span class="badge badge-primary">Jan – Jun 2026</span>
+            </div>
+            <div class="chart-canvas-container">
+              <canvas id="followerGrowthChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 2: Platform Performance (Doughnut Chart) -->
+          <div class="chart-card chart-card-sm">
+            <div class="chart-header">
+              <div class="chart-title-area">
+                <h3>Platform Performance</h3>
+                <p>Audience distribution share</p>
+              </div>
+              <span class="badge badge-success">Top Share</span>
+            </div>
+            <div class="chart-canvas-container">
+              <canvas id="platformPerformanceChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 3: Views Trend (Bar Chart) -->
+          <div class="chart-card chart-card-md">
+            <div class="chart-header">
+              <div class="chart-title-area">
+                <h3>Views Trend</h3>
+                <p>Weekly views vs Short-form reach surge</p>
+              </div>
+              <span class="badge badge-primary">Past 6 Weeks</span>
+            </div>
+            <div class="chart-canvas-container">
+              <canvas id="viewsTrendChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 4: Engagement Rate (Line Area Chart) -->
+          <div class="chart-card chart-card-md">
+            <div class="chart-header">
+              <div class="chart-title-area">
+                <h3>Engagement Rate Trend</h3>
+                <p>Average weekly interaction percentage</p>
+              </div>
+              <span class="badge badge-success">8.7% Peak</span>
+            </div>
+            <div class="chart-canvas-container">
+              <canvas id="engagementRateChart"></canvas>
+            </div>
+          </div>
+
+          <!-- Chart 5: Top Performing Content (Horizontal Chart + Table) -->
+          <div class="chart-card chart-card-full">
+            <div class="chart-header">
+              <div class="chart-title-area">
+                <h3>Top Performing Content</h3>
+                <p>Leading videos and posts ranked by views & engagement</p>
+              </div>
+              <span class="badge badge-primary">Ranked Top 5</span>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; align-items: center;">
+              <!-- Horizontal Chart Canvas -->
+              <div class="chart-canvas-container" style="min-height: 220px;">
+                <canvas id="topContentChart"></canvas>
+              </div>
+
+              <!-- Top Content Summary Table -->
+              <div class="content-table-wrapper">
+                <table class="content-table">
+                  <thead>
+                    <tr>
+                      <th>Content Title</th>
+                      <th>Platform</th>
+                      <th>Views</th>
+                      <th>Engagement</th>
+                      <th>Status</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="content-title-cell">
+                          <span>Full-Stack Flask Guide</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-primary" style="background:#ff000022; color:#ff4444; border-color:#ff000044;">YouTube</span></td>
+                      <td><strong>42.1K</strong></td>
+                      <td>11.4%</td>
+                      <td><span class="badge badge-success">Trending</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="content-title-cell">
+                          <span>System Design in 10 Min</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-primary" style="background:#ff000022; color:#ff4444; border-color:#ff000044;">YouTube</span></td>
+                      <td><strong>33.4K</strong></td>
+                      <td>9.8%</td>
+                      <td><span class="badge badge-success">High Reach</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="content-title-cell">
+                          <span>How Creators Scale Monetization</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-primary" style="background:#0a66c222; color:#38bdf8; border-color:#0a66c244;">LinkedIn</span></td>
+                      <td><strong>26.8K</strong></td>
+                      <td>8.2%</td>
+                      <td><span class="badge badge-primary">Viral</span></td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="content-title-cell">
+                          <span>Top 10 Developer Tools 2026</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-primary" style="background:#e1306c22; color:#f43f5e; border-color:#e1306c44;">Instagram</span></td>
+                      <td><strong>19.2K</strong></td>
+                      <td>7.9%</td>
+                      <td><span class="badge badge-primary">Steady</span></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+</div>
+{% endblock %}
