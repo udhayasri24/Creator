@@ -1,0 +1,59 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Revenue Analytics — CreatorIQ{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-page-header">
+  <div>
+    <h1>Revenue Analytics</h1>
+    <p>Multi-stream monetization tracking, sponsorship earnings, and RPM/CPM benchmarks.</p>
+  </div>
+  <div style="display: flex; align-items: center; gap: 0.75rem;">
+    <span class="badge badge-primary">Milestone 2 Shell</span>
+    <span class="badge badge-warning">Module Scheduled for Milestone 4</span>
+  </div>
+</div>
+
+<div class="feature-box" style="padding: 2.25rem; margin-bottom: 2rem; border-left: 4px solid var(--accent-emerald);">
+  <div style="display: flex; align-items: flex-start; gap: 1.25rem;">
+    <div class="feature-icon-box" style="margin-bottom: 0; color: var(--accent-emerald); border-color: rgba(16, 185, 129, 0.3);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <line x1="12" y1="1" x2="12" y2="23"></line>
+        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+      </svg>
+    </div>
+    <div>
+      <h3 style="font-size: 1.35rem; margin-bottom: 0.65rem;">Creator Monetization Engine</h3>
+      <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; max-width: 860px;">
+        {{ module_description }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="features-grid">
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-emerald);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect><line x1="1" y1="10" x2="23" y2="10"></line></svg>
+    </div>
+    <h4>Brand Sponsorships</h4>
+    <p>Contract deliverables, sponsorship payout tracking, and effective cost-per-view metrics.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-emerald);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"></path><line x1="12" y1="18" x2="12" y2="20"></line><line x1="12" y1="4" x2="12" y2="6"></line></svg>
+    </div>
+    <h4>Platform Ad Revenue</h4>
+    <p>Direct platform monetization: YouTube AdSense RPM/CPM, Instagram bonuses, and video rev share.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-emerald);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg>
+    </div>
+    <h4>Affiliates & Subscriptions</h4>
+    <p>Affiliate link conversions, merchandise sales, and subscription fan memberships aggregated.</p>
+  </div>
+</div>
+{% endblock %}

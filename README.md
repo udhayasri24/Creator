@@ -4,16 +4,16 @@ A centralized analytics platform where creators can monitor YouTube, Instagram, 
 
 ---
 
-## Current Milestone: Milestone 1 (Foundation & UI Shell)
+## Current Milestone: Milestone 2 (Authentication & User Management)
 
-> **Important Note:**  
-> This project follows a milestone-based roadmap. **Milestone 1** implements the project foundation, clean Flask architecture, database configuration with SQLAlchemy for MySQL, and complete modern UI shell with dynamic Dark/Light theme switching and Chart.js visualizations.
+> **Milestone Status:**  
+> **Milestone 2** implements real user registration and login backed by MySQL using SQLAlchemy, secure password hashing with Werkzeug, session-based route protection (`@login_required`), dynamic user profile display, and working endpoints with placeholder pages for all 9 sidebar modules.
 > 
-> *Social media API integrations (YouTube, Instagram, LinkedIn OAuth), backend authentication, database migrations, real analytics processing, PDF/Excel reports, and cloud deployment are scheduled for subsequent milestones.*
+> *Social media API integrations (YouTube, Instagram, LinkedIn OAuth), real analytics calculations, automated sync jobs, export engines, and cloud deployment are scheduled for subsequent milestones.*
 
 ---
 
-## Technology Stack (Milestone 1)
+## Technology Stack
 
 ### Frontend
 - **HTML5**: Semantic document structuring
@@ -24,9 +24,10 @@ A centralized analytics platform where creators can monitor YouTube, Instagram, 
 ### Backend
 - **Python (3.13+)**: Application logic
 - **Flask (3.1+)**: Clean, lightweight WSGI web framework using the Application Factory & Blueprints pattern
+- **Werkzeug Security**: Cryptographic password hashing (`generate_password_hash`, `check_password_hash`)
 
 ### Database & ORM
-- **MySQL**: Relational database engine (configured for Milestone 2+ persistence)
+- **MySQL**: Relational database engine
 - **SQLAlchemy (via Flask-SQLAlchemy 3.1+)**: Object-Relational Mapping (ORM)
 - **PyMySQL**: Pure-Python MySQL client driver
 - **python-dotenv**: Environment configuration management
@@ -48,30 +49,32 @@ A centralized analytics platform where creators can monitor YouTube, Instagram, 
 +-----------------------------------------------------------------+
 |                       Flask Application                         |
 |  - app.py (Application Factory: create_app)                     |
+|  - utils/auth.py (@login_required decorator, session helpers)   |
 |  - Blueprints:                                                  |
 |      * main_bp      -> Landing Page (/)                         |
-|      * auth_bp      -> Login & Register UI (/login, /register)  |
-|      * dashboard_bp -> Analytics Shell (/dashboard)             |
+|      * auth_bp      -> Login, Register, Logout (/login, ...)    |
+|      * dashboard_bp -> Main Dashboard (/dashboard)              |
+|      * analytics_bp -> Content, Audience, Growth, Revenue, etc. |
+|      * settings_bp  -> Settings & Preferences (/settings)       |
 +-----------------------------------------------------------------+
                                 |
                       Database Configuration
                                 ↓
 +-----------------------------------------------------------------+
 |                   SQLAlchemy ORM Layer                          |
-|  - config.py (Config, DevelopmentConfig, ProductionConfig)      |
+|  - config.py (DevelopmentConfig, TestingConfig, etc.)           |
 |  - database/__init__.py (db instance)                           |
-|  - models/__init__.py (User, PlatformAccount schemas ready)     |
+|  - models/user.py (User model with Werkzeug password hashing)   |
+|  - models/__init__.py (User, PlatformAccount)                   |
 +-----------------------------------------------------------------+
                                 |
                          PyMySQL Connector
                                 ↓
 +-----------------------------------------------------------------+
 |                         MySQL Database                          |
-|  (Connection configured via DATABASE_URL or .env credentials)   |
+|  - users table (id, full_name, email, password_hash, role, ...) |
+|  - platform_accounts table (prepared for Milestone 3)           |
 +-----------------------------------------------------------------+
-
-Future Architecture (Milestones 2 & 3+):
-Browser <-> Flask Backend <-> Social Media APIs (YouTube/Instagram/LinkedIn) <-> MySQL
 ```
 
 ---
@@ -92,162 +95,166 @@ creatoriq24/
 ├── database/               # Database initialization
 │   └── __init__.py         # SQLAlchemy instance definition
 │
-├── models/                 # ORM Database Models (Milestone 2 preparation)
-│   └── __init__.py         # User and PlatformAccount schema definitions
+├── models/                 # ORM Database Models
+│   ├── __init__.py         # Model package exports
+│   └── user.py             # User schema with Werkzeug password hashing
+│
+├── utils/                  # Application Utilities
+│   └── auth.py             # @login_required decorator & session helpers
 │
 ├── routes/                 # Modular Blueprint Routes
 │   ├── __init__.py         # Blueprint registration logic
 │   ├── main_routes.py      # Landing page route (/)
-│   ├── auth_routes.py      # Login & Register UI routes (/login, /register)
-│   └── dashboard_routes.py # Dashboard UI shell route (/dashboard)
+│   ├── auth_routes.py      # Registration, login & logout routes
+│   ├── dashboard_routes.py # Dashboard UI shell route (/dashboard)
+│   ├── analytics_routes.py # All sidebar analytics module routes
+│   └── settings_routes.py  # User settings route (/settings)
 │
 ├── templates/              # Jinja2 HTML Templates
 │   ├── base.html           # Master layout with theme engine & Chart.js CDN
+│   ├── dashboard_base.html # Unified layout with sidebar, topbar & user context
 │   ├── index.html          # High-converting SaaS landing page
-│   ├── login.html          # Login UI page
-│   ├── register.html       # Register UI page (with creator roles)
-│   └── dashboard.html      # Analytics dashboard shell with KPI cards & charts
+│   ├── login.html          # Real Login page
+│   ├── register.html       # Real Register page (with creator roles)
+│   ├── dashboard.html      # Main dashboard shell with KPI cards & charts
+│   ├── content_analytics.html # Content Analytics placeholder module
+│   ├── audience_analytics.html # Audience Analytics placeholder module
+│   ├── growth_trends.html  # Growth & Trends placeholder module
+│   ├── revenue.html        # Revenue Analytics placeholder module
+│   ├── platforms.html      # Platform Management placeholder module
+│   ├── reports.html        # Reports & Exports placeholder module
+│   ├── notifications.html  # Notifications & Alerts placeholder module
+│   └── settings.html       # Account Settings & Profile placeholder module
 │
-└── static/                 # Static Assets
-    ├── css/
-    │   └── style.css       # Unified design system, CSS variables & responsiveness
-    └── js/
-        └── app.js          # Dark/Light theme manager, sidebar toggle, Chart.js config
+├── static/                 # Static Assets
+│   ├── css/
+│   │   └── style.css       # Unified design system, CSS variables & alerts
+│   └── js/
+│       └── app.js          # Dark/Light theme manager, sidebar toggle, Chart.js config
+│
+└── tests/                  # Automated Test Suite
+    └── test_milestone2.py  # 12 automated test cases verifying Milestone 2
 ```
 
 ---
 
-## Features Implemented in Milestone 1
+## Features Implemented in Milestone 2
 
-1. **Modern SaaS Landing Page (`/`)**:
-   - Hero section with bold value proposition and preview card.
-   - Quick platform cards for YouTube, Instagram, and LinkedIn.
-   - Core capabilities feature grid.
-   - Direct navigation to Login, Register, and Live Dashboard preview.
+1. **MySQL User Table with SQLAlchemy**:
+   - `id`: Auto-incrementing primary key.
+   - `full_name`: Creator's full name.
+   - `email`: Unique login identifier.
+   - `password_hash`: Cryptographically hashed using Werkzeug (`scrypt` / `pbkdf2`).
+   - `role`: Supported roles: `Creator`, `Agency`, `Marketing Team`, `Administrator`.
+   - `created_at`: UTC timestamp.
 
-2. **Dashboard UI Shell (`/dashboard`)**:
-   - **Collapsible Sidebar**: Dashboard, Content Analytics, Audience Analytics, Growth & Trends, Revenue, Platforms, Reports, Notifications, Settings.
-   - **Top Navigation Bar**: Brand logo, search input, notification icon, user profile widget, and theme toggle button.
-   - **Responsive Drawer**: Hamburger toggle on mobile and tablet devices with backdrop dismiss.
+2. **Real User Registration (`/register`)**:
+   - Form fields: Full Name, Email, Password, Confirm Password, Role.
+   - Enforces field presence, regex email validation, password matching, and duplicate email prevention.
+   - Hashes passwords securely; never stores plaintext passwords.
+   - Displays clear error flash messages if validation fails.
+   - Redirects to `/login` upon success with *"Registration successful. Please log in."*
 
-3. **Dashboard KPI Metric Cards**:
-   - **Total Views**: `125,430` (+14.2% vs last month)
-   - **Total Likes**: `18,240` (+8.5% vs last month)
-   - **Followers**: `42,850` (+5.1% vs last month)
-   - **Engagement Rate**: `8.7%` (+1.8% benchmark)
-   - **Total Revenue**: `₹85,400` (+12.3% vs last month)
+3. **Real User Login (`/login`)**:
+   - Form fields: Email, Password.
+   - Queries database for user and validates password hash.
+   - Rejects non-existent accounts and invalid passwords with uniform message: *"Invalid email or password."*
+   - Sets secure Flask session (`user_id`, `user_name`, `user_email`, `user_role`).
+   - Redirects to `/dashboard` upon successful login.
 
-4. **Interactive Dashboard Charts (Chart.js 4.4)**:
-   - **Follower Growth**: Multi-series line chart tracking monthly audience progression.
-   - **Views Trend**: Dual-series bar chart for video views and shorts/reels reach.
-   - **Engagement Rate**: Curved area chart showing weekly interaction percentages.
-   - **Platform Performance**: Doughnut chart showing audience distribution.
-   - **Top Performing Content**: Horizontal bar chart with a companion summary table ranking top posts.
+4. **Session-Based Authentication & Route Protection**:
+   - `@login_required` decorator checks session presence.
+   - Redirects unauthenticated visitors to `/login` with *"Please log in to continue."*
+   - Adds HTTP headers to prevent browser back-button caching of protected pages.
+   - `/logout` endpoint clears session and redirects to `/login`.
 
-5. **Platform Status Section**:
-   - Dedicated cards for YouTube, Instagram, and LinkedIn displaying **"Not Connected"** status badge as required for Milestone 1.
+5. **Dynamic Current User Information**:
+   - Context processor injects `current_user` into all templates.
+   - Displays real authenticated user's name, email, role, and initials in top navigation and sidebar.
+   - Hardcoded user information completely removed.
 
-6. **Dynamic Theme Engine (Dark & Light Mode)**:
-   - Real-time toggle on every page (Landing, Login, Register, Dashboard).
-   - Saved across sessions using browser `localStorage`.
-   - Inline script prevents flicker/flash on page load.
-   - Chart.js grid and label colors adapt dynamically when switching themes.
-
-7. **Login & Register UI**:
-   - Clean, focused SaaS authentication interfaces.
-   - Register form includes role selection (`Creator`, `Agency`, `Marketing Team`, `Administrator`).
-   - One-click shortcuts to explore the demo dashboard.
-
-8. **MySQL & SQLAlchemy Ready**:
-   - Environment variables loaded securely from `.env` via `python-dotenv`.
-   - `config.py` builds the PyMySQL connection string dynamically without hardcoded secrets.
-   - Initialized `db` instance and model outlines in `models/` ready for Milestone 2 migrations.
+6. **All 9 Working Sidebar Module Pages**:
+   - Fixed the navigation issue from Milestone 1 where sidebar items did not open.
+   - Reusable `dashboard_base.html` template highlights active menu item.
+   - Dedicated routes and pages for:
+     - `/dashboard`
+     - `/content-analytics`
+     - `/audience-analytics`
+     - `/growth-trends`
+     - `/revenue`
+     - `/platforms`
+     - `/reports`
+     - `/notifications`
+     - `/settings`
+   - Every page supports Dark/Light mode and has clear placeholder architecture sections.
 
 ---
 
-## Installation & Setup Instructions
+## Application Routes
 
-### Prerequisites
-- Python 3.10 or higher
-- Git
-- MySQL Server (optional for Milestone 1 UI preview; required for Milestone 2 database storage)
+| Route | Access | Description |
+|---|---|---|
+| `/` | Public | Marketing Landing Page |
+| `/login` | Public | User Login Page |
+| `/register` | Public | User Registration Page |
+| `/logout` | Authenticated | Clears session & logs user out |
+| `/dashboard` | **Protected** | Main Analytics Command Center |
+| `/content-analytics` | **Protected** | Content performance, reach & engagement |
+| `/audience-analytics` | **Protected** | Demographics, active hours & follower churn |
+| `/growth-trends` | **Protected** | Growth monitoring & trend detection |
+| `/revenue` | **Protected** | Multi-stream revenue & sponsorship analytics |
+| `/platforms` | **Protected** | Connected platform management |
+| `/reports` | **Protected** | Reports & document exports |
+| `/notifications` | **Protected** | Alerts & activity feed |
+| `/settings` | **Protected** | Account & application settings |
 
-### Step 1: Clone the Repository
-```bash
-git clone <repository-url>
-cd creatoriq24
-```
+---
 
-### Step 2: Set Up Virtual Environment (Recommended)
-```bash
-# Windows
-python -m venv venv
-.\venv\Scripts\activate
+## Installation & Running Instructions
 
-# macOS / Linux
-python3 -m venv venv
-source venv/bin/activate
-```
-
-### Step 3: Install Required Dependencies
-```bash
-pip install -r requirements.txt
-```
-
-### Step 4: Configure Environment Variables
-Copy `.env.example` to `.env`:
-```bash
-# Windows (PowerShell)
-Copy-Item .env.example .env
-
-# macOS / Linux
-cp .env.example .env
-```
-Open `.env` and configure your settings if you want to connect your local MySQL database:
+### 1. Configure Environment Variables
+Copy `.env.example` to `.env` and set your MySQL credentials:
 ```env
 FLASK_APP=app.py
 FLASK_ENV=development
 FLASK_DEBUG=1
 SECRET_KEY=your_secret_key_here
-DATABASE_URL=mysql+pymysql://root:yourpassword@localhost:3306/creatoriq_db
+
+# MySQL Connection (Set your local MySQL root password):
+DATABASE_URL=mysql+pymysql://root:YOUR_PASSWORD@localhost:3306/creatoriq_db
+
+# Or granular settings:
+MYSQL_HOST=localhost
+MYSQL_PORT=3306
+MYSQL_USER=root
+MYSQL_PASSWORD=YOUR_PASSWORD
+MYSQL_DB=creatoriq_db
 ```
 
-### Step 5: Run the Flask Application
+### 2. Create the MySQL Database (One-time setup in MySQL)
+Open your MySQL terminal or MySQL Workbench:
+```sql
+CREATE DATABASE IF NOT EXISTS creatoriq_db;
+```
+
+### 3. Run Automated Tests
+```bash
+python -m unittest tests/test_milestone2.py
+```
+*All 12 test cases will run and pass.*
+
+### 4. Start the Application
 ```bash
 python app.py
 ```
-Or with Flask CLI:
-```bash
-flask run --port=5000
-```
-
-### Step 6: Open the Application
-Open your web browser and navigate to:
+Open your browser and navigate to:
 ```
 http://127.0.0.1:5000
 ```
 
 ---
 
-## Available Application Routes
-
-| Route | Description |
-|---|---|
-| `http://127.0.0.1:5000/` | CreatorIQ Landing Page |
-| `http://127.0.0.1:5000/login` | Login UI Page |
-| `http://127.0.0.1:5000/register` | Register UI Page |
-| `http://127.0.0.1:5000/dashboard` | Main Analytics Dashboard Shell |
-| `http://127.0.0.1:5000/logout` | Demo session sign-out |
-
----
-
 ## Future Project Roadmap
-
-- **Milestone 2: Authentication & User Management**
-  - Real user registration and login with password hashing (`Werkzeug` / `bcrypt`).
-  - Session handling and Flask-Login integration.
-  - Role-based access control (Creator, Agency, Marketing Team, Admin).
-  - MySQL database table creation and migrations.
 
 - **Milestone 3: Social Media API Integrations**
   - OAuth 2.0 flow for YouTube Data API v3.
@@ -262,6 +269,6 @@ http://127.0.0.1:5000
   - Exportable PDF and Excel performance reports.
 
 - **Milestone 5: Production Deployment & Notifications**
-  - Cloud deployment configuration (e.g., AWS / Render / GCP).
+  - Cloud deployment configuration.
   - In-app notification center and alert triggers.
-  - Performance monitoring and production hardening.
+  - Production hardening.

@@ -1,0 +1,79 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Platforms Management — CreatorIQ{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-page-header">
+  <div>
+    <h1>Platforms Management</h1>
+    <p>Manage connected channel permissions, OAuth tokens, and sync frequencies.</p>
+  </div>
+  <div style="display: flex; align-items: center; gap: 0.75rem;">
+    <span class="badge badge-primary">Milestone 2 Shell</span>
+    <span class="badge badge-warning">OAuth APIs Scheduled for Milestone 3</span>
+  </div>
+</div>
+
+<div class="feature-box" style="padding: 2.25rem; margin-bottom: 2rem; border-left: 4px solid var(--accent-rose);">
+  <div style="display: flex; align-items: flex-start; gap: 1.25rem;">
+    <div class="feature-icon-box" style="margin-bottom: 0; color: var(--accent-rose); border-color: rgba(244, 63, 94, 0.3);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+        <line x1="8" y1="21" x2="16" y2="21"></line>
+        <line x1="12" y1="17" x2="12" y2="21"></line>
+      </svg>
+    </div>
+    <div>
+      <h3 style="font-size: 1.35rem; margin-bottom: 0.65rem;">Platform Integration Hub</h3>
+      <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; max-width: 860px;">
+        {{ module_description }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Platforms Connection Grid -->
+<div class="platform-cards-row">
+  {% for platform in platforms %}
+    <div class="platform-status-card" style="border-top: 3px solid {{ platform.accent }};">
+      <div class="platform-status-header">
+        <div class="platform-brand-info">
+          <div class="platform-icon-circle" style="background-color: {{ platform.accent }};">
+            {% if platform.name == 'YouTube' %}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            {% elif platform.name == 'Instagram' %}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+                <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+              </svg>
+            {% elif platform.name == 'LinkedIn' %}
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+              </svg>
+            {% endif %}
+          </div>
+          <div>
+            <h3>{{ platform.name }}</h3>
+            <p>{{ platform.type }}</p>
+          </div>
+        </div>
+        <span class="badge badge-warning">{{ platform.status }}</span>
+      </div>
+
+      <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.4;">
+        OAuth 2.0 channel synchronization will authenticate your channel tokens in Milestone 3.
+      </p>
+
+      <div class="platform-status-footer">
+        <span style="font-size: 0.775rem; color: var(--text-muted);">OAuth API v3</span>
+        <button class="btn btn-outline btn-sm" onclick="alert('Platform OAuth connections will be active in Milestone 3.');">
+          Connect {{ platform.name }}
+        </button>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+{% endblock %}

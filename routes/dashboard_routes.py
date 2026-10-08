@@ -1,21 +1,24 @@
 """
 Dashboard routes for CreatorIQ.
 Renders the CreatorIQ analytics dashboard shell, KPI summary cards,
-platform connection cards, and sample chart visualizations.
+platform connection cards, and sample chart visualizations for authenticated users.
 """
 
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, session
+from utils.auth import login_required
+from models.user import User
 
 dashboard_bp = Blueprint("dashboard", __name__)
 
 
 @dashboard_bp.route("/dashboard")
+@login_required
 def dashboard_view():
     """
     Render the CreatorIQ Dashboard UI shell.
-    Provides realistic Milestone 1 demo metrics and platform statuses.
+    Requires authentication. Pulls authenticated user data dynamically.
     """
-    # Demo KPI metrics for Milestone 1 UI presentation
+    # Demo KPI metrics for presentation shell
     kpis = {
         "views": {"value": "125,430", "growth": "+14.2%", "period": "vs last month"},
         "likes": {"value": "18,240", "growth": "+8.5%", "period": "vs last month"},
@@ -24,7 +27,7 @@ def dashboard_view():
         "revenue": {"value": "₹85,400", "growth": "+12.3%", "period": "vs last month"},
     }
 
-    # Platform connection statuses (Milestone 1 shows 'Not Connected')
+    # Platform connection statuses (Milestone 1/2 shows 'Not Connected')
     platforms = [
         {
             "id": "youtube",
@@ -59,6 +62,5 @@ def dashboard_view():
         "dashboard.html",
         kpis=kpis,
         platforms=platforms,
-        user_name="Alex Rivera",
-        user_role="Creator"
+        active_page="dashboard"
     )

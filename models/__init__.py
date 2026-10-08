@@ -1,28 +1,11 @@
 """
 Data Models Package for CreatorIQ.
-Prepares SQLAlchemy model architectures for future milestones (Milestone 2+).
+Initializes and exposes SQLAlchemy model classes.
 """
 
-from datetime import datetime
+from datetime import datetime, timezone
 from database import db
-
-
-class User(db.Model):
-    """
-    User model placeholder for Milestone 2 Authentication.
-    Prepared schema for Creators, Agencies, Marketing Teams, and Administrators.
-    """
-    __tablename__ = "users"
-
-    id = db.Column(db.Integer, primary_key=True)
-    full_name = db.Column(db.String(120), nullable=False)
-    email = db.Column(db.String(120), unique=True, nullable=False, index=True)
-    password_hash = db.Column(db.String(255), nullable=True)
-    role = db.Column(db.String(50), default="Creator")  # Creator, Agency, Marketing Team, Administrator
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-
-    def __repr__(self):
-        return f"<User {self.email} ({self.role})>"
+from models.user import User
 
 
 class PlatformAccount(db.Model):
@@ -41,3 +24,6 @@ class PlatformAccount(db.Model):
 
     def __repr__(self):
         return f"<PlatformAccount {self.platform_name} (Connected={self.is_connected})>"
+
+
+__all__ = ["User", "PlatformAccount"]

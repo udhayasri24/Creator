@@ -1243,6 +1243,12 @@ button, input, select, textarea {
   color: #fbbf24;
 }
 
+.alert-danger {
+  background: rgba(244, 63, 94, 0.14);
+  border-color: rgba(244, 63, 94, 0.35);
+  color: #fb7185;
+}
+
 /* Sidebar Backdrop on Mobile */
 .sidebar-backdrop {
   display: none;

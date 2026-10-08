@@ -1,0 +1,61 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Audience Analytics — CreatorIQ{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-page-header">
+  <div>
+    <h1>Audience Analytics</h1>
+    <p>Audience growth velocity, demographic breakdowns, and engagement habits.</p>
+  </div>
+  <div style="display: flex; align-items: center; gap: 0.75rem;">
+    <span class="badge badge-primary">Milestone 2 Shell</span>
+    <span class="badge badge-warning">Module Scheduled for Milestone 3+</span>
+  </div>
+</div>
+
+<div class="feature-box" style="padding: 2.25rem; margin-bottom: 2rem; border-left: 4px solid var(--accent-cyan);">
+  <div style="display: flex; align-items: flex-start; gap: 1.25rem;">
+    <div class="feature-icon-box" style="margin-bottom: 0; color: var(--accent-cyan); border-color: rgba(6, 182, 212, 0.3);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+        <circle cx="9" cy="7" r="4"></circle>
+        <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+        <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+      </svg>
+    </div>
+    <div>
+      <h3 style="font-size: 1.35rem; margin-bottom: 0.65rem;">Audience Intelligence Engine</h3>
+      <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; max-width: 860px;">
+        {{ module_description }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="features-grid">
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-cyan);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"></path><path d="M2 12h20"></path></svg>
+    </div>
+    <h4>Demographics & Geography</h4>
+    <p>Age groups, gender breakdown, top countries, language affinity, and metro area concentration.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-cyan);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+    </div>
+    <h4>Active Hours & Timing</h4>
+    <p>Peak activity heatmaps showing optimal posting windows per platform and timezone.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-cyan);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="8.5" cy="7" r="4"></circle></svg>
+    </div>
+    <h4>Follower Churn & Retention</h4>
+    <p>Net follower velocity, new subscriber acquisitions, and audience lifetime loyalty.</p>
+  </div>
+</div>
+{% endblock %}

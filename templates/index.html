@@ -28,8 +28,13 @@
         <span class="theme-toggle-icon"></span>
       </button>
 
-      <a href="{{ url_for('auth.login') }}" class="btn btn-outline btn-sm">Login</a>
-      <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Get Started</a>
+      {% if current_user %}
+        <a href="{{ url_for('dashboard.dashboard_view') }}" class="btn btn-outline btn-sm">Dashboard</a>
+        <a href="{{ url_for('auth.logout') }}" class="btn btn-primary btn-sm">Sign Out</a>
+      {% else %}
+        <a href="{{ url_for('auth.login') }}" class="btn btn-outline btn-sm">Login</a>
+        <a href="{{ url_for('auth.register') }}" class="btn btn-primary btn-sm">Get Started</a>
+      {% endif %}
     </div>
   </div>
 </header>
@@ -39,7 +44,7 @@
   <div class="hero-glow-bg"></div>
 
   <div class="hero-badge-pill">
-    <span class="badge badge-primary">Milestone 1</span>
+    <span class="badge badge-primary">Milestone 2</span>
     <span>Unified Creator Intelligence Platform</span>
   </div>
 

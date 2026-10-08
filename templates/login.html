@@ -30,12 +30,14 @@
 
   <div class="auth-card">
     <div class="auth-header">
-      <div class="badge badge-primary" style="margin-bottom: 0.75rem;">Milestone 1 Demo UI</div>
+      <div class="badge badge-primary" style="margin-bottom: 0.75rem;">Account Authentication</div>
       <h2>Welcome Back</h2>
       <p>Log in to access your CreatorIQ analytics command center</p>
     </div>
 
     <form action="{{ url_for('auth.login') }}" method="POST">
+      <input type="hidden" name="next" value="{{ request.args.get('next', '') }}">
+
       <div class="form-group">
         <label class="form-label" for="email">Email Address</label>
         <input 
@@ -43,48 +45,34 @@
           id="email" 
           name="email" 
           class="form-input" 
-          placeholder="alex@creatoriq.com" 
-          value="alex@creatoriq.com"
+          placeholder="your.email@creatoriq.com" 
+          value="{{ email or '' }}"
           required
+          autofocus
         >
       </div>
 
       <div class="form-group">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.45rem;">
           <label class="form-label" for="password" style="margin-bottom: 0;">Password</label>
-          <a href="#" style="font-size: 0.8rem; color: var(--accent-primary);" onclick="alert('Password reset will be available in Milestone 2.'); return false;">Forgot password?</a>
         </div>
         <input 
           type="password" 
           id="password" 
           name="password" 
           class="form-input" 
-          placeholder="••••••••••••" 
-          value="password123"
+          placeholder="Enter your password" 
           required
         >
       </div>
 
-      <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.5rem; font-size: 0.85rem;">
-        <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer; color: var(--text-secondary);">
-          <input type="checkbox" name="remember" checked style="accent-color: var(--accent-primary);">
-          <span>Remember this workstation</span>
-        </label>
-      </div>
-
-      <button type="submit" class="btn btn-primary" style="width: 100%;">
+      <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
         <span>Sign In to Dashboard</span>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="5" y1="12" x2="19" y2="12"></line>
           <polyline points="12 5 19 12 12 19"></polyline>
         </svg>
       </button>
-
-      <div style="margin-top: 1rem; text-align: center;">
-        <a href="{{ url_for('dashboard.dashboard_view') }}" class="btn btn-secondary btn-sm" style="width: 100%;">
-          ⚡ Skip Login & Open Demo Dashboard Directly
-        </a>
-      </div>
     </form>
 
     <div class="auth-footer">

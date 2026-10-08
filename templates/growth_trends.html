@@ -1,0 +1,59 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Growth & Trends — CreatorIQ{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-page-header">
+  <div>
+    <h1>Growth & Trends</h1>
+    <p>Predictive growth velocity, emerging niche trends, and audience forecasting.</p>
+  </div>
+  <div style="display: flex; align-items: center; gap: 0.75rem;">
+    <span class="badge badge-primary">Milestone 2 Shell</span>
+    <span class="badge badge-warning">Module Scheduled for Milestone 3+</span>
+  </div>
+</div>
+
+<div class="feature-box" style="padding: 2.25rem; margin-bottom: 2rem; border-left: 4px solid var(--accent-secondary);">
+  <div style="display: flex; align-items: flex-start; gap: 1.25rem;">
+    <div class="feature-icon-box" style="margin-bottom: 0; color: var(--accent-secondary); border-color: rgba(139, 92, 246, 0.3);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"></polyline>
+        <polyline points="17 6 23 6 23 12"></polyline>
+      </svg>
+    </div>
+    <div>
+      <h3 style="font-size: 1.35rem; margin-bottom: 0.65rem;">Growth & Trend Engine</h3>
+      <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; max-width: 860px;">
+        {{ module_description }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="features-grid">
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-secondary);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+    </div>
+    <h4>Growth Monitoring</h4>
+    <p>Real-time momentum tracking to identify viral inflection points and content compounding.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-secondary);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" y1="9" x2="20" y2="9"></line><line x1="4" y1="15" x2="20" y2="15"></line><line x1="10" y1="3" x2="8" y2="21"></line><line x1="16" y1="3" x2="14" y2="21"></line></svg>
+    </div>
+    <h4>Hashtag & Keyword Analysis</h4>
+    <p>Detect rising hashtags, keyword trends, and high-traction audio tags in your content niche.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-secondary);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+    </div>
+    <h4>Predictive Forecasting</h4>
+    <p>Milestone projections estimating when you'll reach 50K, 100K, or 500K followers per channel.</p>
+  </div>
+</div>
+{% endblock %}

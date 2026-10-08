@@ -1,0 +1,95 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Settings & Preferences — CreatorIQ{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-page-header">
+  <div>
+    <h1>Settings & Preferences</h1>
+    <p>Manage your CreatorIQ profile details, role governance, and appearance preferences.</p>
+  </div>
+  <div style="display: flex; align-items: center; gap: 0.75rem;">
+    <span class="badge badge-primary">Milestone 2 Shell</span>
+    <span class="badge badge-success">Profile Loaded</span>
+  </div>
+</div>
+
+<div class="feature-box" style="padding: 2.25rem; margin-bottom: 2rem; border-left: 4px solid var(--accent-primary);">
+  <div style="display: flex; align-items: flex-start; gap: 1.25rem;">
+    <div class="feature-icon-box" style="margin-bottom: 0;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="3"></circle>
+        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+      </svg>
+    </div>
+    <div>
+      <h3 style="font-size: 1.35rem; margin-bottom: 0.65rem;">Account & Application Settings</h3>
+      <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; max-width: 860px;">
+        {{ module_description }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Authenticated User Account Overview Card -->
+<div class="platform-card" style="margin-bottom: 2rem;">
+  <div class="platform-card-header">
+    <div style="display: flex; align-items: center; gap: 1rem;">
+      <div class="avatar" style="width: 52px; height: 52px; font-size: 1.25rem;">
+        {{ current_user.initials if current_user else 'CR' }}
+      </div>
+      <div>
+        <h3 style="font-size: 1.25rem; font-weight: 700;">{{ current_user.name if current_user else 'Creator User' }}</h3>
+        <p style="color: var(--text-secondary); font-size: 0.875rem;">{{ current_user.email if current_user else 'Registered Creator' }}</p>
+      </div>
+    </div>
+    <span class="badge badge-primary">{{ current_user.role if current_user else 'Creator' }}</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--border-color);">
+    <div>
+      <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Assigned Role</span>
+      <div style="font-weight: 600; font-size: 1rem; margin-top: 0.25rem;">{{ current_user.role if current_user else 'Creator' }}</div>
+    </div>
+    <div>
+      <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Authentication Mode</span>
+      <div style="font-weight: 600; font-size: 1rem; margin-top: 0.25rem; color: var(--accent-emerald);">MySQL Hashed Session</div>
+    </div>
+    <div>
+      <span style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Interface Theme</span>
+      <div style="margin-top: 0.25rem;">
+        <button class="btn btn-outline btn-sm theme-toggle-btn" type="button">
+          <span class="theme-toggle-icon"></span>
+          <span>Toggle Dark/Light</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="features-grid">
+  <div class="feature-box">
+    <div class="feature-icon-box">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+    </div>
+    <h4>Security & Password</h4>
+    <p>Password updates, two-factor authentication, and active session invalidation (Scheduled for future milestones).</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+    </div>
+    <h4>Email Preferences</h4>
+    <p>Manage digest delivery frequency, platform alerts, and weekly performance summaries.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+    </div>
+    <h4>Organization Governance</h4>
+    <p>Agency multi-creator roster switches and team permission grants.</p>
+  </div>
+</div>
+{% endblock %}

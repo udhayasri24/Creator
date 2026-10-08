@@ -11,7 +11,10 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent
 
 # Load environment variables from .env file
-load_dotenv(BASE_DIR / ".env")
+# override=True ensures .env values replace any stale/empty inherited environment variables
+loaded = load_dotenv(BASE_DIR / ".env", override=True)
+if not loaded:
+    print(f" [!] WARNING: .env file not found at {BASE_DIR / '.env'}. Using system environment or defaults.")
 
 
 class Config:
@@ -29,6 +32,8 @@ class Config:
     MYSQL_DB = os.getenv("MYSQL_DB", "creatoriq_db")
 
     # SQLAlchemy Database URI (defaults to MySQL with PyMySQL connector)
+    # Note: These class attributes are resolved after load_dotenv(override=True) above,
+    # so they will always reflect the .env values.
     SQLALCHEMY_DATABASE_URI = os.getenv(
         "DATABASE_URL",
         f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DB}"
@@ -46,6 +51,13 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
 
+class TestingConfig(Config):
+    """Testing environment configuration."""
+    TESTING = True
+    DEBUG = False
+    SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+
+
 class ProductionConfig(Config):
     """Production environment configuration."""
     DEBUG = False
@@ -54,6 +66,7 @@ class ProductionConfig(Config):
 # Map environment names to config classes
 config_by_name = {
     "development": DevelopmentConfig,
+    "testing": TestingConfig,
     "production": ProductionConfig,
     "default": DevelopmentConfig,
 }

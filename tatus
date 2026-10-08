@@ -1,0 +1,25 @@
+warning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'app.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'config.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'models/__init__.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'routes/__init__.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'routes/auth_routes.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'routes/dashboard_routes.py', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'static/css/style.css', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'templates/dashboard.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'templates/index.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'templates/login.html', LF will be replaced by CRLF the next time Git touches it
+warning: in the working copy of 'templates/register.html', LF will be replaced by CRLF the next time Git touches it
+ README.md                  | 277 [32m++++++++[m[31m--------[m
+ app.py                     |  49 [32m++[m[31m-[m
+ config.py                  |  15 [32m+[m[31m-[m
+ models/__init__.py         |  26 [32m+[m[31m-[m
+ routes/__init__.py         |  10 [32m+[m[31m-[m
+ routes/auth_routes.py      | 148 [32m+++++++[m[31m--[m
+ routes/dashboard_routes.py |  16 [32m+[m[31m-[m
+ static/css/style.css       |   6 [32m+[m
+ templates/dashboard.html   | 770 [32m+++++++++++++++++[m[31m----------------------------[m
+ templates/index.html       |  11 [32m+[m[31m-[m
+ templates/login.html       |  28 [32m+[m[31m-[m
+ templates/register.html    |  35 [32m+[m[31m--[m
+ 12 files changed, 666 insertions(+), 725 deletions(-)

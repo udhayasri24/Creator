@@ -1,0 +1,59 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Notifications & Alerts — CreatorIQ{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-page-header">
+  <div>
+    <h1>Notifications & Alerts</h1>
+    <p>Real-time operational alerts, viral traction flags, and revenue milestone notifications.</p>
+  </div>
+  <div style="display: flex; align-items: center; gap: 0.75rem;">
+    <span class="badge badge-primary">Milestone 2 Shell</span>
+    <span class="badge badge-warning">Notification Center Scheduled for Milestone 4</span>
+  </div>
+</div>
+
+<div class="feature-box" style="padding: 2.25rem; margin-bottom: 2rem; border-left: 4px solid var(--accent-amber);">
+  <div style="display: flex; align-items: flex-start; gap: 1.25rem;">
+    <div class="feature-icon-box" style="margin-bottom: 0; color: var(--accent-amber); border-color: rgba(245, 158, 11, 0.3);">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+        <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+      </svg>
+    </div>
+    <div>
+      <h3 style="font-size: 1.35rem; margin-bottom: 0.65rem;">Alert & Notification Center</h3>
+      <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; max-width: 860px;">
+        {{ module_description }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="features-grid">
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-amber);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path></svg>
+    </div>
+    <h4>Engagement Spikes</h4>
+    <p>Immediate notifications whenever a video or post exceeds your average engagement rate by 200%+.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-amber);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+    </div>
+    <h4>Revenue Milestones</h4>
+    <p>Real-time payment confirmations, payout threshold milestones, and sponsorship deal alerts.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box" style="color: var(--accent-amber);">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
+    </div>
+    <h4>Channel Health Checks</h4>
+    <p>Alerts for disconnected platform OAuth tokens, unexpected subscriber drops, or API rate limit warnings.</p>
+  </div>
+</div>
+{% endblock %}

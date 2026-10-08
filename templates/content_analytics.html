@@ -1,0 +1,61 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Content Analytics — CreatorIQ{% endblock %}
+
+{% block dashboard_content %}
+<div class="dashboard-page-header">
+  <div>
+    <h1>Content Analytics</h1>
+    <p>Comprehensive video, post, and short-form media engagement benchmarks.</p>
+  </div>
+  <div style="display: flex; align-items: center; gap: 0.75rem;">
+    <span class="badge badge-primary">Milestone 2 Shell</span>
+    <span class="badge badge-warning">Module Scheduled for Milestone 3+</span>
+  </div>
+</div>
+
+<!-- Architecture & Future Milestone Placeholder Banner -->
+<div class="feature-box" style="padding: 2.25rem; margin-bottom: 2rem; border-left: 4px solid var(--accent-primary);">
+  <div style="display: flex; align-items: flex-start; gap: 1.25rem;">
+    <div class="feature-icon-box" style="margin-bottom: 0;">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+        <polyline points="14 2 14 8 20 8"></polyline>
+      </svg>
+    </div>
+    <div>
+      <h3 style="font-size: 1.35rem; margin-bottom: 0.65rem;">Content Analytics Engine</h3>
+      <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; max-width: 860px;">
+        {{ module_description }}
+      </p>
+    </div>
+  </div>
+</div>
+
+<!-- Planned Module Architecture Cards -->
+<div class="features-grid">
+  <div class="feature-box">
+    <div class="feature-icon-box">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+    </div>
+    <h4>Reach & Impressions</h4>
+    <p>Algorithmic reach analysis, feed impressions, and viral velocity across YouTube, Instagram, and LinkedIn.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
+    </div>
+    <h4>Interaction Metrics</h4>
+    <p>Detailed tracking of views, likes, comments, shares, saves, watch time, and retention curves.</p>
+  </div>
+
+  <div class="feature-box">
+    <div class="feature-icon-box">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
+    </div>
+    <h4>Content Benchmarking</h4>
+    <p>Comparative performance analysis between formats: long-form video vs shorts/reels vs text posts.</p>
+  </div>
+</div>
+{% endblock %}
