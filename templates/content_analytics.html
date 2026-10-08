@@ -6,56 +6,157 @@
 <div class="dashboard-page-header">
   <div>
     <h1>Content Analytics</h1>
-    <p>Comprehensive video, post, and short-form media engagement benchmarks.</p>
+    <p>All your content performance data — search, filter, and sort across platforms.</p>
   </div>
-  <div style="display: flex; align-items: center; gap: 0.75rem;">
-    <span class="badge badge-primary">Milestone 2 Shell</span>
-    <span class="badge badge-warning">Module Scheduled for Milestone 3+</span>
-  </div>
-</div>
-
-<!-- Architecture & Future Milestone Placeholder Banner -->
-<div class="feature-box" style="padding: 2.25rem; margin-bottom: 2rem; border-left: 4px solid var(--accent-primary);">
-  <div style="display: flex; align-items: flex-start; gap: 1.25rem;">
-    <div class="feature-icon-box" style="margin-bottom: 0;">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
-        <polyline points="14 2 14 8 20 8"></polyline>
-      </svg>
-    </div>
-    <div>
-      <h3 style="font-size: 1.35rem; margin-bottom: 0.65rem;">Content Analytics Engine</h3>
-      <p style="color: var(--text-secondary); font-size: 1.05rem; line-height: 1.6; max-width: 860px;">
-        {{ module_description }}
-      </p>
+  <div style="display:flex;align-items:center;gap:0.75rem;flex-wrap:wrap;">
+    <span class="badge badge-success">● {{ content_list|length }} Records</span>
+    <div class="period-filter-group" role="group">
+      {% for label, val in [('7D','7'),('30D','30'),('90D','90'),('All','all')] %}
+        <a href="?period={{ val }}&platform={{ selected_platform }}&content_type={{ selected_type }}&search={{ search_query }}&sort_by={{ sort_by }}"
+           class="period-btn {% if period == val %}active{% endif %}">{{ label }}</a>
+      {% endfor %}
     </div>
   </div>
 </div>
 
-<!-- Planned Module Architecture Cards -->
-<div class="features-grid">
-  <div class="feature-box">
-    <div class="feature-icon-box">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
-    </div>
-    <h4>Reach & Impressions</h4>
-    <p>Algorithmic reach analysis, feed impressions, and viral velocity across YouTube, Instagram, and LinkedIn.</p>
-  </div>
-
-  <div class="feature-box">
-    <div class="feature-icon-box">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg>
-    </div>
-    <h4>Interaction Metrics</h4>
-    <p>Detailed tracking of views, likes, comments, shares, saves, watch time, and retention curves.</p>
-  </div>
-
-  <div class="feature-box">
-    <div class="feature-icon-box">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
-    </div>
-    <h4>Content Benchmarking</h4>
-    <p>Comparative performance analysis between formats: long-form video vs shorts/reels vs text posts.</p>
-  </div>
+<!-- KPI Mini Row -->
+{% if kpi_data.has_data %}
+<div class="kpi-mini-row">
+  <div class="kpi-mini-card"><span class="kpi-mini-label">Views</span><span class="kpi-mini-val">{{ format_number(kpi_data.total_views) }}</span></div>
+  <div class="kpi-mini-card"><span class="kpi-mini-label">Likes</span><span class="kpi-mini-val">{{ format_number(kpi_data.total_likes) }}</span></div>
+  <div class="kpi-mini-card"><span class="kpi-mini-label">Comments</span><span class="kpi-mini-val">{{ format_number(kpi_data.total_comments) }}</span></div>
+  <div class="kpi-mini-card"><span class="kpi-mini-label">Shares</span><span class="kpi-mini-val">{{ format_number(kpi_data.total_shares) }}</span></div>
+  <div class="kpi-mini-card"><span class="kpi-mini-label">Reach</span><span class="kpi-mini-val">{{ format_number(kpi_data.total_reach) }}</span></div>
+  <div class="kpi-mini-card"><span class="kpi-mini-label">Eng. Rate</span><span class="kpi-mini-val" style="color:var(--accent-emerald);">{{ kpi_data.avg_engagement_rate }}%</span></div>
 </div>
+{% endif %}
+
+<!-- Filter & Search Bar -->
+<section class="dashboard-section" style="padding-bottom:0;">
+  <form method="get" class="content-filter-bar" id="contentFilterForm">
+    <input type="hidden" name="period" value="{{ period }}">
+
+    <div class="filter-group">
+      <label for="searchInput" class="sr-only">Search</label>
+      <div style="position:relative;">
+        <span style="position:absolute;left:0.75rem;top:50%;transform:translateY(-50%);color:var(--text-muted);">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+        <input id="searchInput" type="text" name="search" value="{{ search_query }}"
+               placeholder="Search content title..." class="filter-input" style="padding-left:2.2rem;">
+      </div>
+    </div>
+
+    <div class="filter-group">
+      <label for="platformFilter" class="sr-only">Platform</label>
+      <select id="platformFilter" name="platform" class="filter-select">
+        <option value="">All Platforms</option>
+        {% for p in valid_platforms %}
+          <option value="{{ p }}" {% if selected_platform == p %}selected{% endif %}>{{ p }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="typeFilter" class="sr-only">Content Type</label>
+      <select id="typeFilter" name="content_type" class="filter-select">
+        <option value="">All Types</option>
+        {% for t in valid_content_types %}
+          <option value="{{ t }}" {% if selected_type == t %}selected{% endif %}>{{ t }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="sortSelect" class="sr-only">Sort by</label>
+      <select id="sortSelect" name="sort_by" class="filter-select">
+        <option value="published_at" {% if sort_by == 'published_at' %}selected{% endif %}>Sort: Newest</option>
+        <option value="views" {% if sort_by == 'views' %}selected{% endif %}>Sort: Views</option>
+        <option value="engagement" {% if sort_by == 'engagement' %}selected{% endif %}>Sort: Engagement</option>
+        <option value="likes" {% if sort_by == 'likes' %}selected{% endif %}>Sort: Likes</option>
+      </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary btn-sm">Apply</button>
+    <a href="{{ url_for('analytics.content_analytics') }}" class="btn btn-outline btn-sm">Reset</a>
+  </form>
+</section>
+
+<!-- Content Table -->
+<section class="dashboard-section">
+  {% if content_list %}
+  <div class="content-table-wrapper" style="overflow-x:auto;">
+    <table class="content-table" id="contentAnalyticsTable">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Platform</th>
+          <th>Type</th>
+          <th>Published</th>
+          <th>Views</th>
+          <th>Likes</th>
+          <th>Comments</th>
+          <th>Shares</th>
+          <th>Saves</th>
+          <th>Reach</th>
+          <th>Eng. Rate</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in content_list %}
+        <tr>
+          <td>{{ loop.index }}</td>
+          <td>
+            <div class="content-title-cell">
+              <span title="{{ item.title }}">{{ item.title[:50] }}{% if item.title|length > 50 %}…{% endif %}</span>
+            </div>
+          </td>
+          <td>
+            {% if item.platform == 'YouTube' %}
+              <span class="badge badge-primary" style="background:#ff000022;color:#ff4444;border-color:#ff000044;">YouTube</span>
+            {% elif item.platform == 'Instagram' %}
+              <span class="badge badge-primary" style="background:#e1306c22;color:#f43f5e;border-color:#e1306c44;">Instagram</span>
+            {% else %}
+              <span class="badge badge-primary" style="background:#0a66c222;color:#38bdf8;border-color:#0a66c244;">LinkedIn</span>
+            {% endif %}
+          </td>
+          <td><span class="badge badge-primary" style="background:var(--bg-tertiary);color:var(--text-secondary);border:none;">{{ item.content_type }}</span></td>
+          <td style="white-space:nowrap;">{{ item.published_at }}</td>
+          <td><strong>{{ format_number(item.views) }}</strong></td>
+          <td>{{ format_number(item.likes) }}</td>
+          <td>{{ format_number(item.comments) }}</td>
+          <td>{{ format_number(item.shares) }}</td>
+          <td>{{ format_number(item.saves) }}</td>
+          <td>{{ format_number(item.reach) }}</td>
+          <td><span style="color:var(--accent-emerald);font-weight:600;">{{ item.engagement_rate }}%</span></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <!-- Empty state -->
+  <div class="empty-state-card">
+    <div class="empty-state-icon">
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"/><polyline points="14 2 14 8 20 8"/></svg>
+    </div>
+    <h2>No Content Found</h2>
+    {% if search_query or selected_platform or selected_type %}
+      <p>No content matches your current filters. Try adjusting or <a href="{{ url_for('analytics.content_analytics') }}">reset filters</a>.</p>
+    {% else %}
+      <p>No content records exist yet. Run <code>python seed_demo_data.py</code> to load demo data.</p>
+    {% endif %}
+  </div>
+  {% endif %}
+</section>
+
+<script>
+// Auto-submit form on select change
+document.querySelectorAll('#platformFilter, #typeFilter, #sortSelect').forEach(function(el) {
+  el.addEventListener('change', function() {
+    document.getElementById('contentFilterForm').submit();
+  });
+});
+</script>
 {% endblock %}

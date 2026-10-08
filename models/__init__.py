@@ -6,11 +6,12 @@ Initializes and exposes SQLAlchemy model classes.
 from datetime import datetime, timezone
 from database import db
 from models.user import User
+from models.content import Content
 
 
 class PlatformAccount(db.Model):
     """
-    Connected platform account model placeholder for Milestone 3+ integrations.
+    Connected platform account model placeholder for Milestone 4 integrations.
     Supports YouTube, Instagram, and LinkedIn.
     """
     __tablename__ = "platform_accounts"
@@ -26,4 +27,5 @@ class PlatformAccount(db.Model):
         return f"<PlatformAccount {self.platform_name} (Connected={self.is_connected})>"
 
 
-__all__ = ["User", "PlatformAccount"]
+__all__ = ["User", "Content", "PlatformAccount"]
+

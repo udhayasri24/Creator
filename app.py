@@ -8,7 +8,7 @@ from flask import Flask, render_template
 from sqlalchemy.exc import OperationalError, SQLAlchemyError
 from config import config_by_name, Config
 from database import db
-from models import User, PlatformAccount
+from models import User, Content, PlatformAccount
 from routes import register_routes
 from utils.auth import get_current_user_data
 

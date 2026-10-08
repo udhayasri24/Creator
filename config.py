@@ -51,11 +51,18 @@ class DevelopmentConfig(Config):
     DEBUG = True
 
 
+from sqlalchemy.pool import StaticPool
+
+
 class TestingConfig(Config):
     """Testing environment configuration."""
     TESTING = True
     DEBUG = False
     SQLALCHEMY_DATABASE_URI = "sqlite:///:memory:"
+    SQLALCHEMY_ENGINE_OPTIONS = {
+        "poolclass": StaticPool,
+        "connect_args": {"check_same_thread": False},
+    }
 
 
 class ProductionConfig(Config):
